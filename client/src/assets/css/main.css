@@ -1,0 +1,35 @@
+.centerAlignCol {
+    margin-left: auto !important;
+    margin-right: auto !important;
+    float: none !important;
+}
+
+.wordInputWrapper {
+    float: none;
+    display: inline-block;
+    margin: 0px !important;
+    min-width: 20px;
+    position: relative;
+}
+
+.wordInputWrapper input {
+    height: auto !important;
+}
+
+.viewContent {
+    line-height: 2.0;
+}
+
+.noMargin {
+    margin: 0px !important;
+}
+
+.wordInputCheckBtn {
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+
+.wordInputWrapper a {
+    padding: 0px;
+}

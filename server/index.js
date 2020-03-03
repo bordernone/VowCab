@@ -1,10 +1,19 @@
 const express = require('express');
 const app = express();
+const bodyParser = require('body-parser');
+const config = require('../config/index');
 
-app.get("/api", (req, res) => {
-    res.send("Hello World");
-});
+var entriesRoute = require('./routes/entries');
 
-app.listen(3001, () => {
-    console.log("listening to port 3001");
+
+app.use(bodyParser.json()); 
+
+app.use(bodyParser.urlencoded({ extended: true })); 
+
+app.use('/api', entriesRoute);
+
+const port = config.backend_port;
+
+app.listen(port, () => {
+    console.log("listening to port " + port);
 });
