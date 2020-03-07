@@ -15,6 +15,7 @@ class Homepage extends Component {
             textareaVal: '',
             defBreaks: [],
             newDef: '',
+            newImgurl: '',
             locked: false,
         }
     }
@@ -37,8 +38,10 @@ class Homepage extends Component {
                 this.setState({
                     waitForKeyUp: true,
                 });
-                console.warn("Both pressed");
-                this.openModal(this.defInputModal);
+                // Both pressed
+                if (this.state.locked){
+                    this.openModal(this.defInputModal);
+                }
             }
         }
     }
@@ -59,15 +62,18 @@ class Homepage extends Component {
         if (cursorStart !== cursorEnd) {
             var currentDefs = this.state.defBreaks;
             var def = this.state.newDef;
+            var imgurl = this.state.newImgurl;
             currentDefs.push({
                 startPos: cursorStart,
                 endPos: cursorEnd,
                 def: def,
+                imgurl: imgurl,
             });
 
             this.setState({
                 defBreaks: currentDefs,
                 newDef: '',
+                newImgurl: '',
                 waitForKeyUp: false,
             });
         }
@@ -110,7 +116,7 @@ class Homepage extends Component {
                 console.error(statusCode, data);
             }
         }).catch(error => {
-            console.log(error);
+            console.error(error);
         });
     }
 
@@ -153,19 +159,24 @@ class Homepage extends Component {
 
                 <div id="modal1" className="modal" ref={modal => { this.defInputModal = modal }}>
                     <div className="modal-content">
-                        <h4>Modal Header</h4>
                         <input
                             id="newDef"
                             onChange={this.handleTextChange}
                             className="validate"
                             placeholder="Definition"
                             value={this.state.newDef} />
+                        <input
+                            id="newImgurl"
+                            onChange={this.handleTextChange}
+                            className="validate"
+                            placeholder="Image or GIF url"
+                            value={this.state.newImgurl} />
                     </div>
                     <div className="modal-footer">
-                        <a
-                            href="#!"
+                        <button
+                            href="#"
                             className="modal-close waves-effect waves-green btn-flat"
-                            onClick={this.handleAddNewDefTrigger}>Done</a>
+                            onClick={this.handleAddNewDefTrigger}>Done</button>
                     </div>
                 </div>
             </div>

@@ -34,7 +34,7 @@ const dbConnection = class DBConnection {
         });
 
         this.db.serialize(() => {
-            _this.db.run('CREATE TABLE entriesDef(entryId INTEGER NOT NULL, startPos INTEGER NOT NULL, endPos INTEGER NOT NULL, definition TEXT)', (error) => {
+            _this.db.run('CREATE TABLE entriesDef(entryId INTEGER NOT NULL, startPos INTEGER NOT NULL, endPos INTEGER NOT NULL, definition TEXT, imgurl TEXT)', (error) => {
                 if (error){
                     if (!error.message.includes('already exists')){
                         console.log(error.message);

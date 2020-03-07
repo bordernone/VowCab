@@ -8,6 +8,11 @@ class WordInput extends Component {
         this.word = this.props.word;
         this.entry = this.props.entry;
         this.meaning = this.entry.def;
+        if (this.entry.imgurl && (this.entry.imgurl).length > 0){
+            this.popoverContentHtml = this.meaning+"<br/><img src=\"" + this.entry.imgurl + "\" class=\"defImg\"/>";
+        } else {
+            this.popoverContentHtml = this.meaning;
+        }
 
         this.state = {
             userInput: '',
@@ -46,7 +51,9 @@ class WordInput extends Component {
                 <div className="wordInputCheckBtn">
                     <a
                         className="waves-effect waves-teal btn-flat tooltipped"
-                        data-position="bottom" data-tooltip={this.meaning}
+                        data-position="bottom"
+                        data-html="true"
+                        data-tooltip={this.popoverContentHtml}
                         onClick={this.handleCheckBtnClick}>
                         <i className="tiny material-icons ">check</i>
                     </a>

@@ -93,9 +93,9 @@ const saveEntry = (connection, content) => {
 const saveEntryDef = (connection, entryDef, entryId) => {
     var db = connection.getConnection();
     db.serialize(() => {
-        let query = `INSERT INTO entriesDef(entryId, startPos, endPos, definition)
-                        VALUES (?, ?, ?, ?)`;
-        db.run(query, [entryId, entryDef.startPos, entryDef.endPos, entryDef.def], (err) => {
+        let query = `INSERT INTO entriesDef(entryId, startPos, endPos, definition, imgurl)
+                        VALUES (?, ?, ?, ?, ?)`;
+        db.run(query, [entryId, entryDef.startPos, entryDef.endPos, entryDef.def, entryDef.imgurl], (err) => {
             if (err) {
                 console.log(err);
             } else {
@@ -139,7 +139,7 @@ const getAllDef = (entryId) => {
 
         var allEntriesDef = [];
         db.serialize(() => {
-            let query = `SELECT startPos, endPos, definition FROM entriesDef WHERE entryId=?`;
+            let query = `SELECT startPos, endPos, definition, imgurl FROM entriesDef WHERE entryId=?`;
             db.all(query, [entryId], (err, rows) => {
                 if (err) {
                     reject();
@@ -150,7 +150,8 @@ const getAllDef = (entryId) => {
                             allEntriesDef.push({
                                 startPos: row.startPos,
                                 endPos: row.endPos,
-                                def: row.definition
+                                def: row.definition,
+                                imgurl: row.imgurl
                             });
                         });
 
@@ -201,7 +202,7 @@ const getAllEntries = () => {
 
         let allEntries = [];
         db.serialize(() => {
-            let query = `SELECT id, content FROM entries`;
+            let query = `SELECT id, content FROM entries ORDER BY id DESC`;
             db.all(query, (error, rows) => {
                 if (error){
                     reject();

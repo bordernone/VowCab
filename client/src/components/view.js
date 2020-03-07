@@ -9,6 +9,7 @@ class View extends Component {
         this.entryId = this.props.match.params.id;
         this.state = {
             content: (<span></span>),
+            modifiedContent: (<span></span>),
             entries: []
         }
     }
@@ -98,7 +99,7 @@ class View extends Component {
         });
 
         this.setState({
-            content: finalContent,
+            modifiedContent: finalContent,
         })
 
     }
@@ -108,7 +109,7 @@ class View extends Component {
         return (
             <div className="row container">
                 <div className="col s12 viewContent">
-                    {this.state.content}
+                    {this.state.modifiedContent}
                 </div>
             </div>
         )
