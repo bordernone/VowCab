@@ -1,4 +1,4 @@
 module.exports = {
-    backend_port: 5000,
     development: true,
+    backend_port: process.env.PORT || 5000,
 }

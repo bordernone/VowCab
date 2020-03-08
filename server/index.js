@@ -3,6 +3,7 @@ const app = express();
 const bodyParser = require('body-parser');
 const path = require("path");
 const config = require('../config/index');
+const herokuNoSleep = require('heroku-nosleep')('peaceful-wildwood-26704.herokuapp.com');
 
 var entriesRoute = require('./routes/entries');
 
@@ -17,7 +18,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use('/api', entriesRoute);
 
 app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname, '..', '/client/build/index.html'));
+    res.sendFile(path.join(__dirname, '..', 'client/build/index.html'));
 });
 
 const port = config.backend_port;
